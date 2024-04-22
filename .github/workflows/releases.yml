@@ -1,0 +1,35 @@
+name: Releases
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Gradle Build
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          arguments: assembleRelease
+
+      - name: Rename Apks
+        run: |
+          mv app/build/outputs/apk/release/app-release.apk WebDAV_Provider-${{ github.ref_name }}.apk
+
+      - name: Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          body: Bump Version
+          files: |
+            WebDAV_Provider-${{ github.ref_name }}.apk

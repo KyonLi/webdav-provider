@@ -31,6 +31,15 @@ android {
 
     compileSdk 34
 
+    signingConfigs {
+        release {
+            storeFile file("$projectDir/keystore/androidkey.jks")
+            storePassword "000000"
+            keyAlias "key0"
+            keyPassword "000000"
+        }
+    }
+
     defaultConfig {
         applicationId packageName
         minSdkVersion 27
@@ -94,6 +103,7 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+	    signingConfig signingConfigs.release
         }
     }
 
