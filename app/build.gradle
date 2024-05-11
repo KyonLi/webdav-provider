@@ -44,12 +44,13 @@ android {
         applicationId packageName
         minSdkVersion 27
         targetSdkVersion 34
-        versionCode 2
-        versionName "0.1.1"
+        versionCode 3
+        versionName "0.1.2"
 
         buildConfigField "String", "GIT_HASH", "\"${getGitHash()}\""
         buildConfigField "String", "GIT_BRANCH", "\"${getGitBranch()}\""
         buildConfigField "java.util.concurrent.atomic.AtomicBoolean", "TEST", "new java.util.concurrent.atomic.AtomicBoolean(false)"
+        buildConfigField "java.util.concurrent.atomic.AtomicBoolean", "DYNAMIC_COLORS", "new java.util.concurrent.atomic.AtomicBoolean(true)"
 
         kapt {
             arguments {
